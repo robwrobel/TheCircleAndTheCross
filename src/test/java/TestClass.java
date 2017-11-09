@@ -1,55 +1,49 @@
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class TestClass {
 
     @Test
     public void testEmptyBoard() {
-        Board board= new Board();
-        for (int x = 1; x <= Board.MAX_COL; x++) {
-            for (int y = 1; y <= Board.MAX_ROW; y++)
-                assertEquals(board.getField(x, y).getMark(),Mark.EMPTY);
+        Board board = new Board();
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        int id = 0;
+        for (Field f : board.fieldList) {
+            assertEquals(f.getId(), id);
+            id++;
         }
-    }
-
-    @Test
-    public void testPlayers() {
-        Player player1 = new Player(Mark.O);
-        Player player2 = new Player(Mark.X);
-        assertTrue(player1.getMark() == Mark.O);
-        assertTrue(player2.getMark() == Mark.X);
     }
 
     @Test
     public void testPen() throws FieldAlreadyMarkedException {
         Board board = new Board();
-        Player player1 = new Player(Mark.O);
-        Pen pen1 = new Pen(player1);
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        Game game = new Game();
 
-        for (int x = 1; x <= Board.MAX_COL; x++) {
-            for (int y = 1; y <= Board.MAX_ROW; y++)
-                pen1.mark(board.getField(x, y));
+        Pen pen1 = new Pen(game.players.get(0));
+        for (int i = 0; i < board.noOfElements; i++) {
+            pen1.mark(board.getField(i));
         }
-
-        for (int x = 1; x <= Board.MAX_COL; x++) {
-            for (int y = 1; y <= Board.MAX_ROW; y++)
-                assertEquals(board.getField(x, y).getMark(),Mark.O);
+        for (int i = 0; i < board.noOfElements; i++) {
+            assertEquals(board.getField(i).getMark(), Mark.O);
         }
     }
 
-    @Test (expectedExceptions = FieldAlreadyMarkedException.class)
+    @Test(expectedExceptions = FieldAlreadyMarkedException.class)
     public void testMarkAlreadyMarkedField() throws FieldAlreadyMarkedException {
         Board board = new Board();
-        Player player1 = new Player(Mark.O);
-        Pen pen1 = new Pen(player1);
-        Player player2 = new Player(Mark.X);
-        Pen pen2 = new Pen(player2);
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        Game game = new Game();
+        Pen pen1 = new Pen(game.players.get(0));
 
-        pen1.mark(board.getField(1,1));
-
-        pen2.mark(board.getField(1,1));
-
+        pen1.mark(board.getField(0));
+        pen1.mark(board.getField(0));
     }
 }

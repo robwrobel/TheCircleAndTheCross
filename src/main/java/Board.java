@@ -1,41 +1,64 @@
-public class Board {
-    public static final int MAX_COL = 3 ;
-    public static final int MAX_ROW = 3;
+import java.util.ArrayList;
+import java.util.List;
 
-    Field [][] board = new Field [MAX_COL][MAX_ROW];
+public class Board {
+    public int maxColNo;
+    public int maxRowNo;
+    public int noOfElements;
+
+    List<Field> fieldList = new ArrayList<>();
+
 
     public Board() {
-        initializeBoard();
+        initialize();
     }
 
-    private void initializeBoard() {
-        for (int col = 0; col < Board.MAX_COL; col++) {
-            for (int row = 0; row < Board.MAX_ROW; row++)
-                board[col][row]=new Field();
-        }
-    }
 
-    public Field getField(int col, int row) {
-        return board[col-1][row-1];
+    public Field getField(int id) {
+        return fieldList.get(id);
     }
 
     public String toString() {
+
         StringBuilder sb = new StringBuilder();
-        sb.append("Row\\Col");
-        for (int col = 0; col< MAX_COL; col++) {
-            sb.append(" ");
-            sb.append(col+1);
-        }
-        sb.append("\n");
-        for (int row=0; row<MAX_ROW ; row++) {
-            sb.append(row + 1);
-            sb.append("       ");
-            for (int col = 0; col < MAX_COL; col++) {
-                sb.append(board[col][row]);
-                sb.append(" ");
+
+        int id = 0;
+
+        for (int col = 0; col < maxColNo; col++) {
+            for (int row = 0; col < maxRowNo; col++) {
+                sb.append(toFieldFormat(id));
+                id++;
             }
             sb.append("\n");
         }
+
         return sb.toString();
+    }
+
+    private String toFieldFormat(int id) {
+        final int finalStringLength = 5;
+        int idLength = String.valueOf(id).length();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < finalStringLength - idLength; i++) {
+            sb.append(" ");
+        }
+        sb.append(id);
+        return sb.toString();
+    }
+
+
+    public void setMaxColumnNo(int maxColNo) {
+        this.maxColNo = maxColNo;
+    }
+
+    public void setMaxRowNo(int maxRowNo) {
+        this.maxRowNo = maxRowNo;
+    }
+
+    public void initialize() {
+        noOfElements = maxColNo * maxRowNo;
+        for (int i = 0; i < noOfElements; i++) {
+            fieldList.add(new Field(i));
+        }
     }
 }

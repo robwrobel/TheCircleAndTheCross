@@ -1,7 +1,9 @@
 public class Tour {
     Player currentPlayer;
     Pen currentPen;
-    Coordinate currentCoordinate=new Coordinate();
+    public boolean isWinner;
+    public boolean isDraw;
+    public int currentId;
 
     public Tour(Player player,Pen pen) {
         currentPlayer= player;

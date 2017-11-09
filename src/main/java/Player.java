@@ -18,4 +18,16 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public void updateScoreForWinner() {
+        score += Scores.WIN.getScore();
+    }
+
+    public void updateScoreForDraw() {
+        score += Scores.DRAW.getScore();
+    }
+
+    public int getScore() {
+        return score;
+    }
 }

@@ -1,11 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
-    private static boolean gameContinue = false;
-
-
-    Player player1 = new Player(Mark.O);
-    Player player2 = new Player(Mark.X);
-    Pen pen1 = new Pen(player1);
-    Pen pen2 = new Pen(player2);
+    List<Player> players = new ArrayList<Player>();
+    {
+        players.add(new Player(Mark.O));
+        players.add(new Player(Mark.X));
+    }
+    List<Pen> pens = new ArrayList<>();
+    {
+        players.stream().forEach((Player player)->pens.add(new Pen(player)));
+    }
 
     ReadInput readInput = new ReadInput();
 
@@ -23,15 +28,16 @@ public class Game {
     }
 
     private void setPlayersNames() {
-        System.out.println("Please enter player 1 name:");
-        player1.setName(readInput.getString());
-        System.out.println("Please enter player 2 name:");
-        player2.setName(readInput.getString());
+        int i=1;
+        for (Player p: players) {
+            System.out.println("Please enter player "+ i + " name:");
+            p.setName(readInput.getString());
+            i++;
+        }
     }
 
-
     private static void printWelcomeMessage() {
-        System.out.println("New Game Started");
+        System.out.println("New Game Started!");
     }
 
 }
