@@ -14,16 +14,21 @@ public class Game {
 
     ReadInput readInput = new ReadInput();
 
+
+
     public static void main(String[] args) {
 
         Game game = new Game();
+
+        Scores scores = new Scores(game);
 
         printWelcomeMessage();
 
         game.setPlayersNames();
 
         for (int match_no = 1; match_no <= 3; match_no++) {
-            new Match(game).start();
+            new Match(game,scores).start();
+            scores.display();
         }
     }
 

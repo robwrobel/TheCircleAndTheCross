@@ -7,7 +7,7 @@ public class Pen {
 
     public void mark(Field field) throws FieldAlreadyMarkedException {
 
-        if (field.getMark()==Mark.EMPTY) {
+        if (field.getMark() == Mark.EMPTY) {
             field.setMark(player.getMark());
         } else {
             throw new FieldAlreadyMarkedException();

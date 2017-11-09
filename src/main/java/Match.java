@@ -2,9 +2,12 @@ public class Match {
     Game game;
     Board board = new Board();
     Tour tour ;
+    Arbiter arbiter = new Arbiter(board);
+    Scores scores;
 
-    public Match(Game game) {
+    public Match(Game game, Scores scores) {
         this.game = game;
+        this.scores = scores;
     }
 
     public void start() {
@@ -24,12 +27,14 @@ public class Match {
             switchUser();
         } while (true);
 
+        displayBoard();
+
         if (tour.isWinner) {
-            tour.currentPlayer.updateScoreForWinner();
+            System.out.println(tour.currentPlayer.getName() + " wins");
+            scores.updateScoreForWinner(tour.currentPlayer);
         } else if (tour.isDraw) {
-            for(Player p: game.players){
-                p.updateScoreForDraw();
-            }
+            System.out.println("We have a draw");
+            scores.updateScoreForDraw();
         }
    }
 
@@ -46,7 +51,7 @@ public class Match {
         int input;
         do {
             input = game.readInput.getInt();
-        } while (input!=1 && input!=2);
+        } while (input != 1 && input != 2);
         if ( input == 1 ) {
             tour = new Tour(game.players.get(0), game.pens.get(0));
         } else {
@@ -69,7 +74,7 @@ public class Match {
     }
 
     public boolean isDraw() {
-        return false;
+        return arbiter.isDraw();
     }
 
     private void askUserForNewId() {

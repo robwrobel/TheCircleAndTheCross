@@ -1,11 +1,29 @@
-public enum Scores {
-    WIN(3),DRAW(1);
-    private int score;
-    Scores(int score) {
-        this.score=score;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Scores {
+    private static final int SCORE_FOR_WIN = 3;
+    private static final int SCORE_FOR_DRAW = 1;
+    private Game game;
+
+    Map<Player,Integer> map = new HashMap<>();
+
+    Scores(Game game) {
+        this.game = game;
+        game.players.forEach((Player p) -> map.put(p,0));
     }
 
-    public int getScore() {
-        return score;
+    public void display() {
+        map.forEach((Player p, Integer score) -> System.out.println(p.getName() + " scored: " + score));
+    }
+
+    public void updateScoreForDraw() {
+        for (Player p : map.keySet()) {
+            map.merge(p, SCORE_FOR_DRAW , (i,j)-> i + j);
+        }
+    }
+
+    public void updateScoreForWinner(Player currentPlayer) {
+        map.merge(currentPlayer , SCORE_FOR_WIN , ( i,j ) -> i + j);
     }
 }
