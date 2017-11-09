@@ -8,12 +8,6 @@ public class Board {
 
     List<Field> fieldList = new ArrayList<>();
 
-
-    public Board() {
-        initialize();
-    }
-
-
     public Field getField(int id) {
         return fieldList.get(id);
     }
@@ -23,10 +17,9 @@ public class Board {
         StringBuilder sb = new StringBuilder();
 
         int id = 0;
-
-        for (int col = 0; col < maxColNo; col++) {
-            for (int row = 0; col < maxRowNo; col++) {
-                sb.append(toFieldFormat(id));
+        for (int row = 0; row < maxRowNo; row++) {
+            for (int col = 0; col < maxColNo; col++) {
+                sb.append(toFieldFormat(getField(id).toString()));
                 id++;
             }
             sb.append("\n");
@@ -35,14 +28,14 @@ public class Board {
         return sb.toString();
     }
 
-    private String toFieldFormat(int id) {
-        final int finalStringLength = 5;
-        int idLength = String.valueOf(id).length();
+    private String toFieldFormat(String field) {
+        final int finalStringLength = 4;
+        int idLength = field.length();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < finalStringLength - idLength; i++) {
             sb.append(" ");
         }
-        sb.append(id);
+        sb.append(field);
         return sb.toString();
     }
 

@@ -21,7 +21,7 @@ public class Field {
 
     @Override
     public String toString() {
-        return getMark().toString();
+        return getMark()==Mark.EMPTY ? String.valueOf(id) : getMark().toString();
     }
 
     public int getId() {

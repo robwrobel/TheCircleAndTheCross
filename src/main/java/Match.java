@@ -38,10 +38,11 @@ public class Match {
         board.setMaxColumnNo(game.readInput.getInt());
         System.out.println("Please enter number of rows");
         board.setMaxRowNo(game.readInput.getInt());
+        board.initialize();
     }
 
     private void whoBegins() {
-        System.out.println("Please select who begins (1-Player1: " + game.players.get(0).getName() + " , 2-Player2: "+game.players.get(1).getName()+ ")");
+        System.out.println("Please select who begins (1 - Player1: " + game.players.get(0).getName() + " , 2 - Player2: "+game.players.get(1).getName()+ ")");
         int input;
         do {
             input = game.readInput.getInt();
