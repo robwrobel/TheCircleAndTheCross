@@ -16,7 +16,7 @@ public class Board {
     }
 
     public Field getField(int col, int row) {
-        return board[col][row];
+        return board[col-1][row-1];
     }
 
     public String toString() {
