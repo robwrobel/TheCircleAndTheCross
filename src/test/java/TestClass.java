@@ -1,16 +1,16 @@
-import org.junit.Test;
+import org.testng.annotations.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class TestClass {
 
     @Test
     public void testEmptyBoard() {
         Board board= new Board();
-        for (int x = 0; x < Board.MAX_COL; x++) {
-            for (int y = 0; y < Board.MAX_ROW; y++)
-                assertEquals(Mark.EMPTY,board.getField(x, y).getMark());
+        for (int x = 1; x <= Board.MAX_COL; x++) {
+            for (int y = 1; y <= Board.MAX_ROW; y++)
+                assertEquals(board.getField(x, y).getMark(),Mark.EMPTY);
         }
     }
 
@@ -28,18 +28,18 @@ public class TestClass {
         Player player1 = new Player(Mark.O);
         Pen pen1 = new Pen(player1);
 
-        for (int x = 0; x < Board.MAX_COL; x++) {
-            for (int y = 0; y < Board.MAX_ROW; y++)
+        for (int x = 1; x <= Board.MAX_COL; x++) {
+            for (int y = 1; y <= Board.MAX_ROW; y++)
                 pen1.mark(board.getField(x, y));
         }
 
-        for (int x = 0; x < Board.MAX_COL; x++) {
-            for (int y = 0; y < Board.MAX_ROW; y++)
-                assertEquals(Mark.O,board.getField(x, y).getMark());
+        for (int x = 1; x <= Board.MAX_COL; x++) {
+            for (int y = 1; y <= Board.MAX_ROW; y++)
+                assertEquals(board.getField(x, y).getMark(),Mark.O);
         }
     }
 
-    @Test (expected = FieldAlreadyMarkedException.class)
+    @Test (expectedExceptions = FieldAlreadyMarkedException.class)
     public void testMarkAlreadyMarkedField() throws FieldAlreadyMarkedException {
         Board board = new Board();
         Player player1 = new Player(Mark.O);
@@ -47,9 +47,9 @@ public class TestClass {
         Player player2 = new Player(Mark.X);
         Pen pen2 = new Pen(player2);
 
-        pen1.mark(board.getField(0,0));
+        pen1.mark(board.getField(1,1));
 
-        pen2.mark(board.getField(0,0));
+        pen2.mark(board.getField(1,1));
 
     }
 }

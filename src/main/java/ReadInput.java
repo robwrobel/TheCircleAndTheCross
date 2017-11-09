@@ -20,4 +20,9 @@ public class ReadInput {
 
         return i;
     }
+
+    public String getString() {
+        String input=scanner.nextLine();
+        return input;
+    }
 }
