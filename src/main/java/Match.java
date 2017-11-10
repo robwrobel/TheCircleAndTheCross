@@ -14,6 +14,7 @@ public class Match {
 
         whoBegins();
         sizeOfBoard();
+        noForWin();
         do {
             displayBoard();
             keepAskingPlayerForNewId();
@@ -37,6 +38,11 @@ public class Match {
             scores.updateScoreForDraw();
         }
    }
+
+    private void noForWin() {
+        System.out.println("Please enter number of consecutive marks for win");
+        arbiter.setNoForWin(game.readInput.getInt());
+    }
 
     private void sizeOfBoard() {
         System.out.println("Please enter number of columns");
@@ -70,7 +76,8 @@ public class Match {
     }
 
     public boolean isWinner() {
-        return false;
+
+        return arbiter.isWinner(tour.currentId);
     }
 
     public boolean isDraw() {

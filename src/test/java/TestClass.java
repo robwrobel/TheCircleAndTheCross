@@ -1,6 +1,8 @@
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class TestClass {
 
@@ -46,4 +48,100 @@ public class TestClass {
         pen1.mark(board.getField(0));
         pen1.mark(board.getField(0));
     }
+
+    @Test
+    public void testHorizontalWinCondition1True() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(3);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(0));
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(2));
+        assertTrue(arbiter.isWinner(2));
+    }
+
+    @Test
+    public void testHorizontalWinCondition1False() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(3);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(0));
+        game.pens.get(0).mark(board.getField(2));
+        assertFalse(arbiter.isWinner(2));
+    }
+
+    @Test
+    public void testHorizontalWinCondition2True() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(5);
+        board.setMaxRowNo(4);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(4);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(2));
+        game.pens.get(0).mark(board.getField(3));
+        game.pens.get(0).mark(board.getField(4));
+        assertTrue(arbiter.isWinner(4));
+
+    }
+
+    @Test
+    public void testHorizontalWinCondition2False() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(5);
+        board.setMaxRowNo(4);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(4);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(2));
+        game.pens.get(0).mark(board.getField(4));
+        assertFalse(arbiter.isWinner(4));
+
+    }
+
+
+    @Test
+    public void testVerticalWinCondition1True() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(3);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(4));
+        game.pens.get(0).mark(board.getField(7));
+        assertTrue(arbiter.isWinner(4));
+
+    }
+
+    @Test
+    public void testVerticalWinCondition2True() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(6);
+        board.setMaxRowNo(5);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(3);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(7));
+        game.pens.get(0).mark(board.getField(13));
+        assertTrue(arbiter.isWinner(7));
+
+    }
+
 }
