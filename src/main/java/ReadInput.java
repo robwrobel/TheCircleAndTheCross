@@ -6,6 +6,7 @@ public class ReadInput {
     public int getInt() {
         boolean repeat = false;
         int i=0;
+
         do {
             String input=scanner.nextLine();
             try {

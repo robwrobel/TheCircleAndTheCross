@@ -7,7 +7,6 @@ public class Arbiter {
 
     private final Board board;
 
-    private int counter = 0;
     private int noForWin;
 
     public Arbiter(Board board) {
@@ -52,6 +51,7 @@ public class Arbiter {
     }
 
     private boolean checkForWin(List<Integer> list , Mark mark) {
+        int counter = 0;
         for (Integer i: list) {
             if (board.getField(i).getMark().equals(mark)) {
                 counter++;

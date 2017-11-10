@@ -129,6 +129,22 @@ public class TestClass {
     }
 
     @Test
+    public void testVerticalWinCondition1False() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(3);
+        board.setMaxRowNo(3);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(3);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(4));
+
+        assertFalse(arbiter.isWinner(4));
+
+    }
+
+    @Test
     public void testVerticalWinCondition2True() throws FieldAlreadyMarkedException {
         Board board= new Board();
         board.setMaxColumnNo(6);
@@ -141,6 +157,38 @@ public class TestClass {
         game.pens.get(0).mark(board.getField(7));
         game.pens.get(0).mark(board.getField(13));
         assertTrue(arbiter.isWinner(7));
+
+    }
+
+    @Test
+    public void testVerticalWinCondition2False() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(6);
+        board.setMaxRowNo(5);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(3);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(1));
+        game.pens.get(0).mark(board.getField(7));
+
+        assertFalse(arbiter.isWinner(7));
+
+    }
+
+    @Test
+    public void testWinConditionFalse() throws FieldAlreadyMarkedException {
+        Board board= new Board();
+        board.setMaxColumnNo(2);
+        board.setMaxRowNo(2);
+        board.initialize();
+        Arbiter arbiter = new Arbiter(board);
+        arbiter.setNoForWin(2);
+        Game game = new Game();
+        game.pens.get(0).mark(board.getField(0));
+        game.pens.get(1).mark(board.getField(1));
+
+        assertFalse(arbiter.isWinner(1));
 
     }
 

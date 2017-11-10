@@ -6,7 +6,9 @@ public class Tour {
     public int currentId;
 
     public Tour(Player player,Pen pen) {
-        currentPlayer= player;
+        currentPlayer = player;
         currentPen=pen;
     }
+
+
 }
