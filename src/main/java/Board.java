@@ -9,7 +9,10 @@ public class Board {
     List<Field> fieldList = new ArrayList<>();
 
     public Field getField(int id) {
-        return fieldList.get(id);
+        if ( id < 0 || id >= fieldList.size() )
+            throw new FieldIndexOutOfBoundsException();
+        else
+            return fieldList.get(id);
     }
 
     public String toString() {
@@ -22,7 +25,7 @@ public class Board {
                 sb.append(toFieldFormat(getField(id).toString()));
                 id++;
             }
-            sb.append("\n");
+            sb.append(System.getProperty("line.separator").toString());
         }
 
         return sb.toString();

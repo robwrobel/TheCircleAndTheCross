@@ -1,16 +1,15 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Scores {
     private static final int SCORE_FOR_WIN = 3;
     private static final int SCORE_FOR_DRAW = 1;
-    private Game game;
 
     Map<Player,Integer> map = new HashMap<>();
 
-    Scores(Game game) {
-        this.game = game;
-        game.players.forEach((Player p) -> map.put(p,0));
+    Scores(List<Player> players) {
+        players.forEach((Player p) -> map.put(p,0));
     }
 
     public void display() {
