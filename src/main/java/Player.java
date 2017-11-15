@@ -1,9 +1,9 @@
 public class Player {
-    private Mark mark;
     private String name;
+    private Mark mark;
 
     public Player(Mark mark) {
-        this.mark=mark;
+        this.mark = mark;
     }
 
     public Mark getMark() {
@@ -18,4 +18,12 @@ public class Player {
         return name;
     }
 
+    public void mark(Field field) throws FieldAlreadyMarkedException {
+
+        if (field.getMark() == Mark.EMPTY) {
+            field.setMark(mark);
+        } else {
+            throw new FieldAlreadyMarkedException();
+        }
+    }
 }

@@ -1,13 +1,13 @@
 public class Tour {
     Player currentPlayer;
-    Pen currentPen;
+
     public boolean isWinner;
     public boolean isDraw;
     public int currentId;
 
-    public Tour(Player player,Pen pen) {
+    public Tour(Player player) {
         currentPlayer = player;
-        currentPen=pen;
+
     }
 
 

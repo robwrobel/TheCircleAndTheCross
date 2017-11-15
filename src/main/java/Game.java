@@ -2,18 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    List<Player> players = new ArrayList<Player>();
+    List<Player> players = new ArrayList<>();
     {
         players.add(new Player(Mark.O));
         players.add(new Player(Mark.X));
     }
-    List<Pen> pens = new ArrayList<>();
-    {
-        players.stream().forEach((Player player)->pens.add(new Pen(player)));
-    }
+
+
 
     ReadInput readInput = new ReadInput();
-
 
 
     public static void main(String[] args) {

@@ -59,9 +59,9 @@ public class Match {
             input = game.readInput.getInt();
         } while (input != 1 && input != 2);
         if ( input == 1 ) {
-            tour = new Tour(game.players.get(0), game.pens.get(0));
+            tour = new Tour(game.players.get(0));
         } else {
-            tour = new Tour(game.players.get(1), game.pens.get(1));
+            tour = new Tour(game.players.get(1));
         }
     }
 
@@ -93,7 +93,7 @@ public class Match {
     public boolean isSetMarkFail() {
         int currentId=tour.currentId;
         try {
-            tour.currentPen.mark(board.getField(currentId));
+            tour.currentPlayer.mark(board.getField(currentId));
             return false;
         } catch (FieldAlreadyMarkedException e) {
             return true;
@@ -103,10 +103,9 @@ public class Match {
     private void switchUser() {
         if (tour.currentPlayer == game.players.get(0)) {
             tour.currentPlayer = game.players.get(1);
-            tour.currentPen = game.pens.get(1);
+
         } else {
             tour.currentPlayer = game.players.get(0);
-            tour.currentPen = game.pens.get(0);
         }
     }
 
